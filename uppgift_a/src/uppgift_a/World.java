@@ -34,7 +34,7 @@ public class World {
         shapes[1] = new Circle(300, 10, Color.RED, true,20);
         shapes[1].setVelocity(-150, 160);
         
-        shapes[2] = new Circle(150, 200, Color.BLACK, false, 20);
+        shapes[2] = new Circle(150, 200, Color.BLACK, false, 40);
         shapes[2].setVelocity(150, 160);
         
         shapes[3] = new Rect(150, 250, Color.GREEN, false, 20, 40);
@@ -63,6 +63,17 @@ public class World {
         for (int i = 0; i < shapes.length; i++) { 
             shapes[i].move(elapsedTimeNs);
             shapes[i].constrain(0, 0, width, height);
+            
+            if(shapes[i] instanceof FillableShape)
+            {
+                FillableShape temp = (FillableShape)shapes[i];
+                if(temp.getDx() < 0){
+                    temp.setFilled(true);
+                }
+                else{
+                    temp.setFilled(false);
+                }
+            }
         }
         System.out.println(width + ", " + height);
     }
