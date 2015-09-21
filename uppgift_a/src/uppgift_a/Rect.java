@@ -21,6 +21,22 @@ public class Rect extends FillableShape{
         
     }
     
+    public void constrain(
+            double boxX, double boxY, 
+            double boxWidth, double boxHeight) {
+        // If outside the box - calculate new dx and dy
+        if (getX() < boxX) {
+            setVelocity(Math.abs(getDx()), getDy());
+        } else if (getX() + width  > boxWidth) {
+            setVelocity(-Math.abs(getDx()), getDy());
+        }
+        if (getY() < boxY) {
+            setVelocity(getDx(), Math.abs(getDy()));
+        } else if (getY() + height > boxHeight) {
+            setVelocity(getDx(), -Math.abs(getDy()));
+        }
+    }
+    
     @Override
     public void paint(GraphicsContext gc){
         
